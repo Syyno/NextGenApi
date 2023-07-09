@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+option csharp_namespace = "PaymentsAPI.Protocol";
+
+import "google/protobuf/timestamp.proto";
+
+service PaymentsRpc {
+  rpc GetPayment (PaymentRequest) returns (PaymentResponse);
+}
+
+message PaymentRequest {
+  string Id = 1;
+  string ExternalId = 2;
+}
+
+message PaymentResponse {
+  bool IsSuccess = 1;
+  repeated Error Errors = 2;
+  Payment Data = 3;
+}
+
+message Payment {
+  string Id = 1;
+  string ExternalId = 2;
+  string OrderId = 3;
+  google.protobuf.Timestamp CreatedAt = 4;
+  double PaymentSum = 5;
+  int32 PaymentType = 6;
+}
+
+message Error {
+  int32 ErrorCode = 1;
+  string Message = 2;
+}

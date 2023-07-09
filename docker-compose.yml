@@ -1,0 +1,18 @@
+version: "3.4"
+
+networks:
+  my-home-network:
+    external: true
+
+services:
+  payments_api:
+    image: mypayments_api_v1
+    environment:
+      - ENVIRONMENT=Development
+    build:
+      context: .
+      dockerfile: src/Payments.WebAPI/Dockerfile
+    ports:
+      - "4444:80"
+    networks:
+      - my-home-network
